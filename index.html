@@ -1,372 +1,2351 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ALUMAX SP - Esquadrias de Alumínio Premium em São Paulo. Portas, janelas, divisórias, fachadas e pele de vidro sob medida.">
-  <meta name="keywords" content="esquadrias alumínio, portas alumínio, janelas alumínio, divisórias, fachadas, São Paulo">
-  <meta name="author" content="ALUMAX SP">
-  <title>ALUMAX SP | Esquadrias de Alumínio Premium</title>
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230f3a7d' width='100' height='100'/><text x='50' y='65' font-size='60' font-weight='bold' fill='%2300bcd4' text-anchor='middle' font-family='Arial'>A</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>ALUMAX SP | Esquadrias de Alumínio Sob Medida em São Paulo</title>
+    <meta name="description" content="ALUMAX SP - Especialistas em esquadrias de alumínio sob medida em São Paulo. Portas, janelas, divisórias, fachadas, pele de vidro e ACM com qualidade e acabamento impecável.">
+    <meta name="keywords" content="esquadrias de alumínio, portas de alumínio, janelas de alumínio, divisórias, fachadas, pele de vidro, ACM, São Paulo">
+    <meta property="og:title" content="ALUMAX SP | Esquadrias de Alumínio Sob Medida">
+    <meta property="og:description" content="Especialistas em esquadrias de alumínio sob medida em São Paulo. Qualidade e acabamento impecável.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #1f2332;
+            --navy: #264653;
+            --primary-royal: #004d99;
+            --accent-cyan: #00bcd4;
+            --accent-bright: #4dd0e1;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray-medium: #9e9e9e;
+            --text-dark: #2d3748;
+            --border-light: #e0e0e0;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #12184b;
+            overflow-x: hidden;
+        }
+
+        /* ───────────────────── ANIMATIONS ───────────────────── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotateIcon {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ───────────────────── NAVBAR ───────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            transition: all 0.3s ease;
+            background: transparent;
+            transform: translateY(0);
+        }
+
+        nav.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
+        }        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: auto;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-container {
+                height: 128px;
+                padding: 0 2rem;
+            }
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .logo-wrapper img {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            z-index: 10;
+            transform-origin: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 0 0px rgba(0, 188, 212, 0);
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .logo-wrapper img {
+                height: 112px;
+            }
+        }
+
+        nav.scrolled .logo-wrapper img {
+            transform: scale(1.08);
+            box-shadow: 0 0 15px 2px rgba(0, 188, 212, 0.6), inset 0 0 15px rgba(0, 188, 212, 0.2);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2.5rem;
+            margin-left: auto;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-cta {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent-cyan);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .nav-cta {
+                display: flex;
+            }
+        }
+
+        .nav-cta:hover {
+            background: #4dd0e1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: white;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-menu-btn.open span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-btn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0f172a;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 1rem;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 0.75rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .mobile-menu .nav-cta {
+            display: flex !important;
+            margin-top: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ───────────────────── HERO ───────────────────── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            margin-top: 64px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                margin-top: 128px;
+            }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-hero-ToEaWTvoH9r3yf6mD6vkj8.webp') center/cover no-repeat;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(31, 35, 50, 0.95), rgba(38, 70, 83, 0.8), rgba(64, 120, 132, 0.4));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+            z-index: 3;
+            max-width: 50%;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                max-width: 80%;
+            }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 188, 212, 0.15);
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            border-radius: 9999px;
+            padding: 0.375rem 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .hero-tag span {
+            color: var(--accent-cyan);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            color: white;
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3.75rem;
+            }
+        }
+
+        h1 .cyan {
+            color: var(--accent-cyan);
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 35rem;
+            animation: fadeInUp 0.6s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+            animation: fadeInUp 0.6s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4dd0e1;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 188, 212, 0.45);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .stat {
+                text-align: left;
+            }
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        @media (min-width: 768px) {
+            .stat-number {
+                font-size: 2.25rem;
+            }
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: color 0.2s ease;
+            animation: bounce 2s infinite;
+            text-decoration: none;
+            z-index: 3;
+        }
+
+        .scroll-indicator:hover {
+            color: white;
+        }
+
+        /* ───────────────────── SECTIONS ───────────────────── */
+        section {
+            padding: 6rem 0;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                padding: 6rem 0;
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* ───────────────────── SECTION HEADERS ───────────────────── */
+        .section-tag {
+            color: var(--accent-cyan);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 2.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            h2 {
+                font-size: 3rem;
+            }
+        }
+
+        h2 .accent {
+            color: var(--primary-royal);
+        }
+
+        h2 .cyan {
+            color: var(--accent-cyan);
+        }
+
+        .section-subtitle {
+            color: var(--gray-medium);
+            font-size: 1.125rem;
+            line-height: 1.6;
+            max-width: 45rem;
+        }
+
+        /* ───────────────────── DIFERENCIAIS ───────────────────── */
+        #diferenciais {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #diferenciais::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 384px;
+            height: 384px;
+            background: rgba(0, 188, 212, 0.04);
+            border-radius: 50%;
+            transform: translateY(-50%) translateX(50%);
+        }
+
+        #diferenciais::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 256px;
+            height: 256px;
+            background: rgba(0, 77, 153, 0.04);
+            border-radius: 50%;
+            transform: translateY(50%) translateX(-50%);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .card {
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-light);
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 188, 212, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
+            background: rgba(0, 188, 212, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            background: var(--accent-cyan);
+            color: white;
+        }
+
+        .card h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ───────────────────── SERVICOS ───────────────────── */
+        #servicos {
+            background: #fafafa;
+            position: relative;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+        }
+
+        .service-image {
+            position: relative;
+            height: 208px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(31, 35, 50, 0.6), transparent);
+        }
+
+        .service-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-cyan);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            z-index: 10;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-content p {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .service-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .service-link:hover {
+            gap: 0.75rem;
+        }
+
+        /* ───────────────────── PROJETOS ───────────────────── */
+        #projetos {
+            background: var(--navy-deep);
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        #projetos h2 {
+            color: white;
+        }
+
+        .decorative-number {
+            position: absolute;
+            font-family: var(--font-display);
+            font-size: 12rem;
+            font-weight: 700;
+            opacity: 0.03;
+            user-select: none;
+            pointer-events: none;
+            line-height: 1;
+            color: white;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            height: 240px;
+        }
+
+        .gallery-item.featured {
+            grid-column: span 1;
+            height: 240px;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-item.featured {
+                grid-column: span 2;
+                grid-row: span 2;
+                height: 100%;
+                min-height: 400px;
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem;
+            background: linear-gradient(to top, rgba(31, 35, 50, 0.85), transparent);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            color: white;
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .gallery-location {
+            color: var(--accent-cyan);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+
+        /* ───────────────────── NORMAS ───────────────────── */
+        #normas {
+            background: linear-gradient(to bottom, white, #fafafa);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .normas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .normas-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .norma-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            border: 1px solid #e8e8e8;
+            transition: all 0.4s ease;
+        }
+
+        .norma-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .norma-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .norma-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--primary-royal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .norma-code {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .norma-card h3 {
+            font-weight: 600;
+            color: var(--navy-deep);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .norma-card p {
+            color: var(--gray-medium);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .beneficios-two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .beneficios-two-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .beneficios-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .beneficio-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: all 0.5s ease;
+        }
+
+        .beneficio-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .beneficio-text {
+            color: var(--gray-medium);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .norma-highlight {
+            background: linear-gradient(135deg, var(--navy-deep), var(--primary-royal));
+            color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .norma-highlight svg {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .norma-highlight h4 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .norma-highlight p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .norma-highlight .border-top {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+        }
+
+        /* ───────────────────── SOBRE ───────────────────── */
+        #sobre {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-image {
+            position: relative;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .about-image {
+                display: block;
+            }
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: var(--navy-deep);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            color: white;
+            z-index: 10;
+        }
+
+        .about-badge-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .about-badge-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .about-line {
+            position: absolute;
+            left: -16px;
+            top: 2rem;
+            bottom: 2rem;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--primary-royal));
+            border-radius: 9999px;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .about-line {
+                display: block;
+            }
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .valor-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .valor-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0, 188, 212, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+        }
+
+        .valor-text {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+
+        /* ───────────────────── TESTIMONIALS ───────────────────── */
+        #testimonials {
+            background: #fafafa;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, #fefefe, #f6f6f6);
+            border: 1px solid #e8e8e8;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.5s ease;
+        }
+
+        .testimonial:hover {
+            border-color: rgba(0, 188, 212, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .star {
+            color: var(--accent-cyan);
+            font-size: 0.875rem;
+        }
+
+        .testimonial-text {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 188, 212, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--navy-deep);
+            font-size: 0.85rem;
+        }
+
+        .author-role {
+            color: var(--gray-medium);
+            font-size: 0.8rem;
+        }
+
+        /* ───────────────────── CTA ───────────────────── */
+        #cta {
+            background: var(--navy-deep);
+            position: relative;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+
+        #cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-hero-ToEaWTvoH9r3yf6mD6vkj8.webp') center/cover no-repeat;
+            opacity: 0.1;
+        }
+
+        #cta::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--navy-deep);
+            opacity: 0.92;
+        }
+
+        .cta-line-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-cyan), transparent);
+        }
+
+        .cta-line-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-cyan), transparent);
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        #cta h2 {
+            color: white;
+            max-width: 50rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin: 1.5rem auto 2.5rem;
+            max-width: 50rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .cta-buttons {
+                flex-direction: row;
+            }
+        }
+
+        .btn-large {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .trust-indicators {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 640px) {
+            .trust-indicators {
+                flex-direction: row;
+            }
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        /* ───────────────────── FOOTER ───────────────────── */
+        footer {
+            background: #0f1419;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-brand img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            max-width: 20rem;
+            margin-top: 0.75rem;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-display);
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent-cyan);
+        }
+
+        .contact-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 0.375rem;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: rgba(0, 188, 212, 0.15);
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-value {
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.75rem;
+        }
+
+        /* ───────────────────── WHATSAPP FLOAT ───────────────────── */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 40;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5);
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        /* ───────────────────── RESPONSIVE ───────────────────── */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.875rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding-bottom: 2rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 240px;
+            }
+
+            .gallery-item.featured {
+                height: 240px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- ───────────────────── NAVBAR ───────────────────── -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-wrapper">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-logo-new_c61a48dd.webp" alt="ALUMAX SP" id="logo-img">
+            </a>
 
-<!-- ============================================
-     NAVBAR
-     ============================================ -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-logo">
-      <span>ALUMAX SP</span>
-    </div>
-    <ul class="navbar-menu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#diferenciais">Diferenciais</a></li>
-      <li><a href="#servicos">Serviços</a></li>
-      <li><a href="#galeria">Projetos</a></li>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#depoimentos">Depoimentos</a></li>
-      <li><a href="#cta" class="navbar-cta">Solicitar Orçamento</a></li>
-    </ul>
-    <button class="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</nav>
+            <div class="nav-links">
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#normas">Normas</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </div>
 
-<!-- ============================================
-     HERO SECTION
-     ============================================ -->
-<section id="home" class="hero">
-  <div class="container">
-    <div class="hero-container">
-      <div class="hero-content fade-in-up">
-        <h1>Esquadrias de Alumínio Premium</h1>
-        <p>Soluções em alumínio sob medida para portas, janelas, divisórias, fachadas e pele de vidro. 12 anos transformando espaços em São Paulo.</p>
-        <div class="hero-cta">
-          <button class="btn btn-primary" onclick="openWhatsApp('Gostaria de saber mais sobre esquadrias de alumínio')">Solicitar Orçamento</button>
-          <button class="btn btn-secondary" onclick="openInstagram()">Conheça Nossos Projetos</button>
-        </div>
-      </div>
-      <div class="hero-image fade-in-up">
-        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop" alt="Fachada moderna em alumínio e vidro">
-      </div>
-    </div>
-  </div>
-</section>
+            <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="nav-cta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Orçamento
+            </a>
 
-<!-- ============================================
-     DIFERENCIAIS SECTION
-     ============================================ -->
-<section id="diferenciais" class="diferenciais">
-  <div class="container">
-    <div class="section-title">
-      <h2>Por Que Escolher ALUMAX SP?</h2>
-      <p class="section-subtitle">Qualidade, inovação e excelência em cada projeto</p>
-    </div>
-    <div class="diferenciais-grid">
-      <div class="diferencial-card fade-in-up">
-        <div class="diferencial-icon">🏆</div>
-        <h3>12 Anos de Excelência</h3>
-        <p>Mais de uma década transformando espaços com qualidade e profissionalismo comprovado.</p>
-      </div>
-      <div class="diferencial-card fade-in-up">
-        <div class="diferencial-icon">📐</div>
-        <h3>Projetos Sob Medida</h3>
-        <p>Cada projeto é único. Desenvolvemos soluções personalizadas para suas necessidades específicas.</p>
-      </div>
-      <div class="diferencial-card fade-in-up">
-        <div class="diferencial-icon">✅</div>
-        <h3>Normas ABNT</h3>
-        <p>Todos os produtos seguem rigorosamente as normas técnicas ABNT para segurança e durabilidade.</p>
-      </div>
-      <div class="diferencial-card fade-in-up">
-        <div class="diferencial-icon">💼</div>
-        <h3>Equipe Especializada</h3>
-        <p>Profissionais treinados e certificados prontos para executar seu projeto com excelência.</p>
-      </div>
-      <div class="diferencial-card fade-in-up">
-        <div class="diferencial-icon">⚡</div>
-        <h3>Entrega Rápida</h3>
-        <p>Prazos respeitados e cronograma eficiente para sua obra não sofrer atrasos.</p>
-      </div>
-      <div class="diferencial-card fade-in-up">
-        <div class="diferencial-icon">🔒</div>
-        <h3>Garantia Completa</h3>
-        <p>Garantia de até 5 anos em nossos produtos e serviços. Sua satisfação é nossa prioridade.</p>
-      </div>
-    </div>
-  </div>
-</section>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
 
-<!-- ============================================
-     SERVIÇOS SECTION
-     ============================================ -->
-<section id="servicos" class="servicos">
-  <div class="container">
-    <div class="section-title">
-      <h2>Nossos Serviços</h2>
-      <p class="section-subtitle">Soluções completas em alumínio para qualquer projeto</p>
-    </div>
-    <div class="servicos-grid">
-      <div class="servico-card fade-in-up">
-        <div class="servico-icon">🚪</div>
-        <h3>Portas em Alumínio</h3>
-        <p>Portas de entrada, saída e internas. Designs modernos com segurança e durabilidade.</p>
-      </div>
-      <div class="servico-card fade-in-up">
-        <div class="servico-icon">🪟</div>
-        <h3>Janelas Premium</h3>
-        <p>Janelas de correr, basculante e pivotante. Isolamento térmico e acústico superior.</p>
-      </div>
-      <div class="servico-card fade-in-up">
-        <div class="servico-icon">📦</div>
-        <h3>Divisórias</h3>
-        <p>Divisórias em vidro e alumínio para ambientes corporativos e residenciais.</p>
-      </div>
-      <div class="servico-card fade-in-up">
-        <div class="servico-icon">🏢</div>
-        <h3>Fachadas</h3>
-        <p>Fachadas modernas em alumínio e vidro. Soluções inovadoras para edifícios.</p>
-      </div>
-      <div class="servico-card fade-in-up">
-        <div class="servico-icon">💎</div>
-        <h3>Pele de Vidro</h3>
-        <p>Sistemas de pele de vidro para fachadas espetaculares e funcionalidade máxima.</p>
-      </div>
-      <div class="servico-card fade-in-up">
-        <div class="servico-icon">🎨</div>
-        <h3>ACM (Painéis)</h3>
-        <p>Painéis ACM para revestimento e acabamento com design contemporâneo.</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#diferenciais" class="mobile-link">Diferenciais</a>
+            <a href="#servicos" class="mobile-link">Serviços</a>
+            <a href="#projetos" class="mobile-link">Projetos</a>
+            <a href="#normas" class="mobile-link">Normas</a>
+            <a href="#sobre" class="mobile-link">Sobre</a>
+            <a href="#contato" class="mobile-link">Contato</a>
+            <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="nav-cta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Solicitar Orçamento
+            </a>
+        </div>
+    </nav>
 
-<!-- ============================================
-     GALERIA SECTION
-     ============================================ -->
-<section id="galeria" class="galeria">
-  <div class="container">
-    <div class="section-title">
-      <h2>Nossos Projetos</h2>
-      <p class="section-subtitle">Conheça alguns dos projetos que transformamos em realidade</p>
-    </div>
-    <div class="galeria-grid">
-      <div class="galeria-item fade-in-up">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" alt="Projeto 1">
-        <div class="galeria-overlay">
-          <div class="galeria-overlay-text">
-            <h3>Fachada Corporativa</h3>
-            <p>Vidro e alumínio</p>
-          </div>
+    <!-- ───────────────────── HERO ───────────────────── -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span>São Paulo · Esquadrias de Alumínio Sob Medida</span>
+            </div>
+            <h1>Esquadrias de Alumínio <span class="cyan">Sob Medida</span> com Qualidade e Acabamento Profissional.</h1>
+            <p class="hero-subtitle">Portas, janelas, divisórias, fachadas e soluções personalizadas em alumínio para projetos residenciais e comerciais em São Paulo. Precisão na execução, materiais de alta durabilidade e instalação especializada.</p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Solicitar Orçamento no WhatsApp
+                </a>
+                <a href="#projetos" class="btn btn-secondary">Ver Projetos Realizados</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
+                    <div class="stat-label">Projetos Entregues</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">anos de Experiência</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
+                    <div class="stat-label">Satisfação Garantida</div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="galeria-item fade-in-up">
-        <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop" alt="Projeto 2">
-        <div class="galeria-overlay">
-          <div class="galeria-overlay-text">
-            <h3>Residência Moderna</h3>
-            <p>Janelas e portas</p>
-          </div>
-        </div>
-      </div>
-      <div class="galeria-item fade-in-up">
-        <img src="https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=400&h=300&fit=crop" alt="Projeto 3">
-        <div class="galeria-overlay">
-          <div class="galeria-overlay-text">
-            <h3>Divisórias Corporativas</h3>
-            <p>Vidro e alumínio</p>
-          </div>
-        </div>
-      </div>
-      <div class="galeria-item fade-in-up">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" alt="Projeto 4">
-        <div class="galeria-overlay">
-          <div class="galeria-overlay-text">
-            <h3>Pele de Vidro</h3>
-            <p>Sistema inovador</p>
-          </div>
-        </div>
-      </div>
-      <div class="galeria-item fade-in-up">
-        <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop" alt="Projeto 5">
-        <div class="galeria-overlay">
-          <div class="galeria-overlay-text">
-            <h3>Fachada Comercial</h3>
-            <p>Alumínio e vidro</p>
-          </div>
-        </div>
-      </div>
-      <div class="galeria-item fade-in-up">
-        <img src="https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=400&h=300&fit=crop" alt="Projeto 6">
-        <div class="galeria-overlay">
-          <div class="galeria-overlay-text">
-            <h3>Projeto Residencial</h3>
-            <p>Acabamento premium</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        <a href="#diferenciais" class="scroll-indicator">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+    </section>
 
-<!-- ============================================
-     SOBRE SECTION
-     ============================================ -->
-<section id="sobre" class="sobre">
-  <div class="container">
-    <div class="sobre-container">
-      <div class="sobre-image fade-in-up">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&h=400&fit=crop" alt="Sobre ALUMAX SP">
-      </div>
-      <div class="sobre-content fade-in-up">
-        <h2>Sobre a ALUMAX SP</h2>
-        <p>A ALUMAX SP é uma empresa especializada em esquadrias de alumínio premium, com mais de 12 anos de experiência transformando espaços em São Paulo.</p>
-        <p>Nosso compromisso é entregar soluções inovadoras, seguras e duráveis em portas, janelas, divisórias, fachadas, pele de vidro e painéis ACM.</p>
-        <p>Cada projeto é desenvolvido com atenção aos detalhes, respeitando rigorosamente as normas técnicas ABNT e as expectativas de nossos clientes.</p>
-        
-        <div class="sobre-stats">
-          <div class="stat-item fade-in-up">
-            <div class="stat-number">12</div>
-            <div class="stat-label">Anos de Excelência</div>
-          </div>
-          <div class="stat-item fade-in-up">
-            <div class="stat-number">500</div>
-            <div class="stat-label">Projetos Realizados</div>
-          </div>
-          <div class="stat-item fade-in-up">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Satisfação Garantida</div>
-          </div>
-          <div class="stat-item fade-in-up">
-            <div class="stat-number">24h</div>
-            <div class="stat-label">Atendimento</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- ───────────────────── DIFERENCIAIS ───────────────────── -->
+    <section id="diferenciais" class="scroll-reveal">
+        <div class="container">
+            <div>
+                <span class="section-tag">Por que escolher a ALUMAX SP</span>
+                <h2>Nossos <span class="accent">Diferenciais</span></h2>
+                <p class="section-subtitle">Combinamos tecnologia, materiais premium e expertise técnica para entregar esquadrias que superam expectativas.</p>
+            </div>
 
-<!-- ============================================
-     DEPOIMENTOS SECTION
-     ============================================ -->
-<section id="depoimentos" class="depoimentos">
-  <div class="container">
-    <div class="section-title">
-      <h2>O Que Nossos Clientes Dizem</h2>
-      <p class="section-subtitle">Satisfação e confiança em cada projeto</p>
-    </div>
-    <div class="depoimentos-grid">
-      <div class="depoimento-card fade-in-up">
-        <div class="depoimento-stars">★★★★★</div>
-        <p class="depoimento-text">"Excelente qualidade e profissionalismo. A ALUMAX SP entregou nosso projeto no prazo e com acabamento impecável."</p>
-        <div class="depoimento-author">
-          <div class="depoimento-avatar">C.E.</div>
-          <div class="depoimento-info">
-            <h4>Carlos E.</h4>
-            <p>Empresário</p>
-          </div>
+            <div class="cards-grid">
+                <div class="card scroll-reveal">
+                    <div class="card-icon">📏</div>
+                    <h3>Projeto Sob Medida</h3>
+                    <p>Cada esquadria é projetada e fabricada de acordo com as especificações exatas do seu projeto, garantindo encaixe perfeito.</p>
+                </div>
+                <div class="card scroll-reveal">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Alta Durabilidade</h3>
+                    <p>Utilizamos perfis de alumínio de alta qualidade com tratamento anticorrosão, garantindo décadas de vida útil.</p>
+                </div>
+                <div class="card scroll-reveal">
+                    <div class="card-icon">🔧</div>
+                    <h3>Instalação Especializada</h3>
+                    <p>Equipe técnica treinada e certificada para instalação precisa, com acabamento impecável em qualquer tipo de obra.</p>
+                </div>
+                <div class="card scroll-reveal">
+                    <div class="card-icon">🏆</div>
+                    <h3>Acabamento Profissional</h3>
+                    <p>Atenção máxima aos detalhes em cada etapa do processo, do projeto à entrega final com qualidade premium.</p>
+                </div>
+                <div class="card scroll-reveal">
+                    <div class="card-icon">⚡</div>
+                    <h3>Precisão na Execução</h3>
+                    <p>Processos rigorosos de controle de qualidade garantem que cada peça seja entregue com tolerâncias mínimas.</p>
+                </div>
+                <div class="card scroll-reveal">
+                    <div class="card-icon">✓</div>
+                    <h3>Atendimento Personalizado</h3>
+                    <p>Acompanhamento dedicado desde o primeiro contato até a entrega, com suporte pós-instalação incluído.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="depoimento-card fade-in-up">
-        <div class="depoimento-stars">★★★★★</div>
-        <p class="depoimento-text">"Confiamos na ALUMAX SP para renovar toda a fachada do prédio. Resultado espetacular e equipe muito atenciosa."</p>
-        <div class="depoimento-author">
-          <div class="depoimento-avatar">F.L.</div>
-          <div class="depoimento-info">
-            <h4>Fernanda L.</h4>
-            <p>Arquiteta</p>
-          </div>
+    </section>
+
+    <!-- ───────────────────── SERVICOS ───────────────────── -->
+    <section id="servicos" class="scroll-reveal">
+        <div class="container">
+            <div style="text-align: center; max-width: 50rem; margin: 0 auto 4rem;">
+                <span class="section-tag">O que oferecemos</span>
+                <h2>Nossos <span class="accent">Serviços</span></h2>
+                <p class="section-subtitle">Soluções completas em alumínio para projetos residenciais, comerciais e industriais em São Paulo.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <div class="service-image">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-porta-Jbchb6NtJjbsNuCcpUCfDi.webp" alt="Portas de Alumínio">
+                        <span class="service-tag">Residencial & Comercial</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Portas de Alumínio</h3>
+                        <p>Portas de entrada, pivotantes, de correr e de abrir em alumínio com vidro temperado ou laminado.</p>
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="service-link">
+                            Solicitar Orçamento <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-reveal">
+                    <div class="service-image">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-janelas-ao8DEMKeR2zCHZ4hFiDUDS.webp" alt="Janelas de Alumínio">
+                        <span class="service-tag">Sob Medida</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Janelas de Alumínio</h3>
+                        <p>Janelas de correr, maxim-ar, projetante e de abrir com perfis de alta resistência e vedação superior.</p>
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="service-link">
+                            Solicitar Orçamento <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-reveal">
+                    <div class="service-image">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-divisorias-cte6EeJ7TionWnXydgYEoi.webp" alt="Divisórias">
+                        <span class="service-tag">Corporativo</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Divisórias</h3>
+                        <p>Divisórias em alumínio e vidro para escritórios e ambientes corporativos com design moderno.</p>
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="service-link">
+                            Solicitar Orçamento <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-reveal">
+                    <div class="service-image">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-fachada-optimized_5bd07c13.jpg" alt="Fachadas & Pele de Vidro">
+                        <span class="service-tag">Alto Padrão</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Fachadas & Pele de Vidro</h3>
+                        <p>Fachadas estruturais e semi-estruturais com sistema pele de vidro para projetos arquitetônicos de alto padrão.</p>
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="service-link">
+                            Solicitar Orçamento <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-reveal">
+                    <div class="service-image">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-fachada-optimized_5bd07c13.jpg" alt="ACM">
+                        <span class="service-tag">Revestimento</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>ACM</h3>
+                        <p>Revestimento em Alumínio Composto para fachadas com acabamento premium e alta durabilidade.</p>
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="service-link">
+                            Solicitar Orçamento <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card scroll-reveal">
+                    <div class="service-image">
+                        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-janelas-ao8DEMKeR2zCHZ4hFiDUDS.webp" alt="Esquadrias Sob Medida">
+                        <span class="service-tag">Personalizado</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Esquadrias Sob Medida</h3>
+                        <p>Projetos especiais e fechamentos personalizados para qualquer necessidade arquitetônica.</p>
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="service-link">
+                            Solicitar Orçamento <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="depoimento-card fade-in-up">
-        <div class="depoimento-stars">★★★★★</div>
-        <p class="depoimento-text">"Projeto residencial perfeito. Qualidade, segurança e design moderno. Recomendo muito a ALUMAX SP!"</p>
-        <div class="depoimento-author">
-          <div class="depoimento-avatar">M.S.</div>
-          <div class="depoimento-info">
-            <h4>Mariana S.</h4>
-            <p>Cliente Residencial</p>
-          </div>
+    </section>
+
+    <!-- ───────────────────── PROJETOS ───────────────────── -->
+    <section id="projetos" class="scroll-reveal">
+        <div class="decorative-number" style="top: 2rem; right: 2rem;">03</div>
+        <div class="container">
+            <div>
+                <span class="section-tag">Nosso portfólio</span>
+                <h2>Projetos <span class="cyan">Realizados</span></h2>
+                <p class="section-subtitle">Serviço finalizado com <strong>qualidade e acabamento impecável</strong>. Cada projeto é entregue com atenção máxima aos detalhes.</p>
+            </div>
+
+            <div class="gallery">
+                <div class="gallery-item featured scroll-reveal">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/projeto1_optimized_586f710c.jpg" alt="Fachada com Pele de Vidro Premium">
+                    <div class="gallery-overlay">
+                        <h3>Fachada com Pele de Vidro Premium</h3>
+                        <div class="gallery-location">📍 São Paulo, SP</div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/projeto2_optimized_ac1b19eb.jpg" alt="Janelas Curvas com Vidro Verde">
+                    <div class="gallery-overlay">
+                        <h3>Janelas Curvas com Vidro Verde</h3>
+                        <div class="gallery-location">📍 São Paulo, SP</div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-fachada-optimized_5bd07c13.jpg" alt="Fachada Corporativa">
+                    <div class="gallery-overlay">
+                        <h3>Fachada Corporativa</h3>
+                        <div class="gallery-location">📍 Paulista, SP</div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-janelas-ao8DEMKeR2zCHZ4hFiDUDS.webp" alt="Janelas Panorâmicas">
+                    <div class="gallery-overlay">
+                        <h3>Janelas Panorâmicas</h3>
+                        <div class="gallery-location">📍 Brooklin, SP</div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-divisorias-cte6EeJ7TionWnXydgYEoi.webp" alt="Divisórias Corporativas">
+                    <div class="gallery-overlay">
+                        <h3>Divisórias Corporativas</h3>
+                        <div class="gallery-location">📍 Vila Olímpia, SP</div>
+                    </div>
+                </div>
+                <div class="gallery-item scroll-reveal">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-porta-Jbchb6NtJjbsNuCcpUCfDi.webp" alt="Portas de Entrada Premium">
+                    <div class="gallery-overlay">
+                        <h3>Portas de Entrada Premium</h3>
+                        <div class="gallery-location">📍 Jardins, SP</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Solicitar Orçamento para seu Projeto
+                </a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================
-     CTA SECTION
-     ============================================ -->
-<section id="cta" class="cta">
-  <div class="container">
-    <h2>Pronto para Transformar Seu Espaço?</h2>
-    <p>Solicite um orçamento gratuito e descubra como a ALUMAX SP pode elevar seu projeto.</p>
-    <div class="cta-buttons">
-      <button class="btn btn-light" onclick="openWhatsApp('Gostaria de solicitar um orçamento para meu projeto')">Solicitar Orçamento via WhatsApp</button>
-      <button class="btn btn-light" onclick="openInstagram()">Conheça Nossos Projetos</button>
-    </div>
-  </div>
-</section>
+    <!-- ───────────────────── NORMAS ABNT ───────────────────── -->
+    <section id="normas" class="scroll-reveal">
+        <div class="decorative-number" style="top: 2rem; left: 2rem;">04</div>
+        <div class="container">
+            <div>
+                <span class="section-tag">Qualidade e Conformidade</span>
+                <h2>Normas Técnicas ABNT que <span class="cyan">Garantem Segurança</span></h2>
+                <p class="section-subtitle">Toda esquadria ALUMAX SP é executada seguindo rigorosamente as normas técnicas brasileiras. Isso significa que você recebe não apenas um produto, mas uma solução durável, segura e que valoriza seu imóvel.</p>
+            </div>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-container">
-      <div class="footer-section">
-        <h3>ALUMAX SP</h3>
-        <p>Esquadrias de alumínio premium em São Paulo. Portas, janelas, divisórias, fachadas e pele de vidro sob medida.</p>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/alumaxsp?igsh=MXJpcnk2OTR2YWo3dg==" class="social-link" target="_blank" title="Instagram">📱</a>
-          <a href="https://wa.me/5511987654321" class="social-link" target="_blank" title="WhatsApp">💬</a>
-          <a href="mailto:contato@alumaxsp.com.br" class="social-link" target="_blank" title="Email">✉️</a>
+            <div class="normas-grid" style="margin-bottom: 4rem; margin-top: 3rem;">
+                <div class="norma-card scroll-reveal">
+                    <div class="norma-header">
+                        <div class="norma-icon">✓</div>
+                        <div class="norma-code">NBR 10821</div>
+                    </div>
+                    <h3>Desempenho de Esquadrias</h3>
+                    <p>Garante resistência, estanqueidade e isolamento térmico/acústico</p>
+                </div>
+                <div class="norma-card scroll-reveal">
+                    <div class="norma-header">
+                        <div class="norma-icon">✓</div>
+                        <div class="norma-code">NBR 7199</div>
+                    </div>
+                    <h3>Vidros de Segurança</h3>
+                    <p>Vidros temperados e laminados para máxima proteção</p>
+                </div>
+                <div class="norma-card scroll-reveal">
+                    <div class="norma-header">
+                        <div class="norma-icon">✓</div>
+                        <div class="norma-code">NBR 6123</div>
+                    </div>
+                    <h3>Resistência ao Vento</h3>
+                    <p>Estruturas calculadas para suportar pressões extremas</p>
+                </div>
+                <div class="norma-card scroll-reveal">
+                    <div class="norma-header">
+                        <div class="norma-icon">✓</div>
+                        <div class="norma-code">NBR 16259</div>
+                    </div>
+                    <h3>Instalação Correta</h3>
+                    <p>Procedimentos técnicos para fixação e vedação profissional</p>
+                </div>
+                <div class="norma-card scroll-reveal">
+                    <div class="norma-header">
+                        <div class="norma-icon">✓</div>
+                        <div class="norma-code">NBR 15575</div>
+                    </div>
+                    <h3>Desempenho da Edificação</h3>
+                    <p>Norma geral que garante qualidade e durabilidade da obra</p>
+                </div>
+            </div>
+
+            <div class="beneficios-two-col">
+                <div>
+                    <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem;">Benefícios de Trabalhar com Normas ABNT</h3>
+                    <div class="beneficios-list">
+                        <div class="beneficio-item scroll-reveal">
+                            <div class="beneficio-check">✓</div>
+                            <span class="beneficio-text">Vedação completa contra infiltração de água</span>
+                        </div>
+                        <div class="beneficio-item scroll-reveal">
+                            <div class="beneficio-check">✓</div>
+                            <span class="beneficio-text">Segurança estrutural e proteção contra impactos</span>
+                        </div>
+                        <div class="beneficio-item scroll-reveal">
+                            <div class="beneficio-check">✓</div>
+                            <span class="beneficio-text">Durabilidade garantida por 10+ anos</span>
+                        </div>
+                        <div class="beneficio-item scroll-reveal">
+                            <div class="beneficio-check">✓</div>
+                            <span class="beneficio-text">Valorização do imóvel em até 20%</span>
+                        </div>
+                        <div class="beneficio-item scroll-reveal">
+                            <div class="beneficio-check">✓</div>
+                            <span class="beneficio-text">Isolamento térmico e acústico superior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="norma-highlight">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <h4>Segurança em Cada Detalhe</h4>
+                    <p>Quando você escolhe a ALUMAX SP, você não está apenas comprando esquadrias. Está investindo em segurança, durabilidade e na valorização do seu imóvel. Cada norma ABNT que seguimos é uma garantia de que sua obra será executada com excelência.</p>
+                    <div class="border-top">
+                        <p><strong>Evite dor de cabeça na obra:</strong> Contrate quem segue as normas técnicas e garante qualidade desde o primeiro dia.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Solicitar Orçamento com Normas ABNT Garantidas
+                </a>
+            </div>
         </div>
-      </div>
-      <div class="footer-section">
-        <h3>Serviços</h3>
-        <a href="#servicos">Portas em Alumínio</a>
-        <a href="#servicos">Janelas Premium</a>
-        <a href="#servicos">Divisórias</a>
-        <a href="#servicos">Fachadas</a>
-        <a href="#servicos">Pele de Vidro</a>
-        <a href="#servicos">Painéis ACM</a>
-      </div>
-      <div class="footer-section">
-        <h3>Empresa</h3>
-        <a href="#sobre">Sobre Nós</a>
-        <a href="#galeria">Projetos</a>
-        <a href="#depoimentos">Depoimentos</a>
-        <a href="#diferenciais">Diferenciais</a>
-      </div>
-      <div class="footer-section">
-        <h3>Contato</h3>
-        <p>📍 São Paulo, SP</p>
-        <p>📞 (11) 98765-4321</p>
-        <p>✉️ contato@alumaxsp.com.br</p>
-        <p>🕐 Seg-Sex: 08h-18h</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 ALUMAX SP. Todos os direitos reservados. | <a href="#" style="color: inherit;">Política de Privacidade</a></p>
-    </div>
-  </div>
-</footer>
+    </section>
 
-<!-- JavaScript -->
-<script src="js/script.js"></script>
+    <!-- ───────────────────── SOBRE ───────────────────── -->
+    <section id="sobre" class="scroll-reveal">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-fachada-optimized_5bd07c13.jpg" alt="ALUMAX SP — Especialistas em Alumínio">
+                    <div class="about-line"></div>
+                    <div class="about-badge">
+                        <div class="about-badge-number">12+</div>
+                        <div class="about-badge-text">Anos de Excelência</div>
+                    </div>
+                </div>
 
+                <div>
+                    <span class="section-tag">Sobre a ALUMAX SP</span>
+                    <h2>Especialistas em <span class="accent">Alumínio Sob Medida</span> em São Paulo</h2>
+                    <p style="color: var(--gray-medium); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">A ALUMAX SP é uma empresa especializada em esquadrias de alumínio sob medida, atendendo projetos residenciais e comerciais em São Paulo e região. Com mais de 12 anos de experiência, nos destacamos pela qualidade dos materiais utilizados, pela precisão na fabricação e pelo acabamento impecável em cada projeto.</p>
+                    <p style="color: var(--gray-medium); font-size: 1rem; line-height: 1.6; margin-bottom: 2rem;">Nossa equipe técnica é treinada para oferecer instalação profissional e especializada, garantindo que cada esquadria seja instalada com perfeição, valorizando o seu imóvel e superando suas expectativas.</p>
+
+                    <div class="valores-grid" style="margin-bottom: 2rem;">
+                        <div class="valor-item scroll-reveal">
+                            <div class="valor-check">✓</div>
+                            <span class="valor-text">Materiais de alta durabilidade</span>
+                        </div>
+                        <div class="valor-item scroll-reveal">
+                            <div class="valor-check">✓</div>
+                            <span class="valor-text">Instalação profissional certificada</span>
+                        </div>
+                        <div class="valor-item scroll-reveal">
+                            <div class="valor-check">✓</div>
+                            <span class="valor-text">Acabamento impecável em cada detalhe</span>
+                        </div>
+                        <div class="valor-item scroll-reveal">
+                            <div class="valor-check">✓</div>
+                            <span class="valor-text">Valorização do seu imóvel</span>
+                        </div>
+                        <div class="valor-item scroll-reveal">
+                            <div class="valor-check">✓</div>
+                            <span class="valor-text">Projetos residenciais e comerciais</span>
+                        </div>
+                        <div class="valor-item scroll-reveal">
+                            <div class="valor-check">✓</div>
+                            <span class="valor-text">Atendimento em toda São Paulo</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="btn" style="background: var(--primary-royal); color: white; display: inline-flex;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        Fale com um Especialista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ───────────────────── TESTIMONIALS ───────────────────── -->
+    <section id="testimonials" class="scroll-reveal">
+        <div class="container">
+            <div style="text-align: center; max-width: 50rem; margin: 0 auto 4rem;">
+                <span class="section-tag">O que dizem nossos clientes</span>
+                <h2>Depoimentos de <span class="accent">Clientes</span></h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial scroll-reveal">
+                    <div class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">Acabamento impecável. Instalação perfeita, sem folgas.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <div class="author-name">C.E.M.</div>
+                            <div class="author-role">Proprietário • Moema</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial scroll-reveal">
+                    <div class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">Atendimento profissional. Entrega conforme combinado no prazo.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">F</div>
+                        <div class="author-info">
+                            <div class="author-name">F.L.</div>
+                            <div class="author-role">Arquiteta • Vila Olímpia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial scroll-reveal">
+                    <div class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">Divisórias do escritório. Instalação organizada. Resultado excelente.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <div class="author-name">R.A.</div>
+                            <div class="author-role">Empresário • Paulista</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial scroll-reveal">
+                    <div class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">Empresa séria. Entrega conforme combinado. Qualidade excelente.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <div class="author-name">A.P.S.</div>
+                            <div class="author-role">Engenheira Civil • Brooklin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ───────────────────── CTA ───────────────────── -->
+    <section id="cta" class="scroll-reveal">
+        <div class="cta-line-top"></div>
+        <div class="cta-content">
+            <span class="section-tag">Pronto para começar?</span>
+            <h2>Transforme seu projeto com esquadrias de alumínio de <span class="cyan">alto padrão</span></h2>
+            <p class="cta-subtitle">Solicite seu orçamento agora e receba atendimento personalizado de nossos especialistas. Entrega conforme combinado, qualidade garantida.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Solicitar Orçamento Grátis
+                </a>
+                <a href="https://www.instagram.com/alumaxsp?igsh=MXJpcnk2OTR2YWo3dg==" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <circle cx="17.5" cy="6.5" r="1.5"></circle>
+                    </svg>
+                    Ver no Instagram
+                </a>
+            </div>
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Orçamento sem compromisso</span>
+                </div>
+                <div class="trust-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span>Garantia de qualidade</span>
+                </div>
+                <div class="trust-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                        <path d="M13 2H3v18h18V8m-5-5 5 5M9 13h6"></path>
+                    </svg>
+                    <span>Atendimento rápido</span>
+                </div>
+            </div>
+        </div>
+        <div class="cta-line-bottom"></div>
+    </section>
+
+    <!-- ───────────────────── FOOTER ───────────────────── -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663505133177/XaVbDFafBurVDYg55uyFvU/alumax-logo-new_c61a48dd.webp" alt="ALUMAX SP">
+                    <p>Especialistas em esquadrias de alumínio sob medida em São Paulo. Qualidade, precisão e acabamento impecável em cada projeto.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Serviços</h4>
+                    <div class="footer-links">
+                        <a href="#servicos">Portas de Alumínio</a>
+                        <a href="#servicos">Janelas de Alumínio</a>
+                        <a href="#servicos">Divisórias</a>
+                        <a href="#servicos">Fachadas & Pele de Vidro</a>
+                        <a href="#servicos">ACM</a>
+                        <a href="#servicos">Esquadrias Sob Medida</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <div class="footer-contact">
+                        <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="contact-item">
+                            <div class="contact-icon">💬</div>
+                            <div>
+                                <div class="contact-label">WhatsApp</div>
+                                <div class="contact-value">(11) 92467-9423</div>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/alumaxsp?igsh=MXJpcnk2OTR2YWo3dg==" target="_blank" rel="noopener noreferrer" class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <div class="contact-label">Instagram</div>
+                                <div class="contact-value">@alumaxsp</div>
+                            </div>
+                        </a>
+                        <div class="contact-item" style="cursor: default;">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <div class="contact-label">Localização</div>
+                                <div class="contact-value">São Paulo — SP</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 ALUMAX SP — Todos os direitos reservados.</p>
+                <p class="footer-copyright">Esquadrias de Alumínio Sob Medida em São Paulo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ───────────────────── WHATSAPP FLOAT ───────────────────── -->
+    <a href="https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 011-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        // ───────────────────── LOGO ROTATION ON SCROLL ───────────────────── 
+        const logoImg = document.getElementById('logo-img');
+        let rotationAngle = 0;
+
+        window.addEventListener('scroll', () => {
+            rotationAngle += 4;
+            logoImg.style.transform = `rotate(${rotationAngle}deg)`;
+            logoImg.style.boxShadow = `0 0 15px 2px rgba(0, 188, 212, 0.6), inset 0 0 15px rgba(0, 188, 212, 0.2)`;
+            logoImg.style.border = `2px solid var(--accent-cyan)`;
+        });
+
+        // ───────────────────── NAVBAR & MENU HIDE ───────────────────── 
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let lastScrollY = 0;
+        let scrollDirection = 'down';
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            // Detectar direção do scroll
+            if (currentScrollY > lastScrollY) {
+                scrollDirection = 'down';
+            } else {
+                scrollDirection = 'up';
+            }
+            lastScrollY = currentScrollY;
+            
+            // Adicionar classe scrolled
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+                // Ocultar menu ao fazer scroll para baixo
+                if (scrollDirection === 'down' && window.scrollY > 300) {
+                    navbar.classList.add('hidden');
+                } else {
+                    navbar.classList.remove('hidden');
+                }
+            } else {
+                navbar.classList.remove('scrolled');
+                navbar.classList.remove('hidden');
+            }
+        });
+
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // ───────────────────── SMOOTH SCROLL ───────────────────── 
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ───────────────────── INTERSECTION OBSERVER ───────────────────── 
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ───────────────────── COUNTER ANIMATION ───────────────────── 
+        const animateCounter = (el) => {
+            const target = parseInt(el.dataset.target);
+            let current = 0;
+            const duration = 1800;
+            const step = Math.ceil(target / (duration / 16));
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    el.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = current;
+                }
+            }, 16);
+        };
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target.querySelector('.counter');
+                    if (counter && !counter.classList.contains('animated')) {
+                        counter.classList.add('animated');
+                        animateCounter(counter);
+                    }
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.hero-stats').forEach(el => {
+            counterObserver.observe(el);
+        });
+    </script>
 </body>
 </html>
