@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - ALUMAX SP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    .login-container.hidden { display: none; }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #00d9ff, #00a8cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-header p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #00d9ff;
+      background: rgba(0, 217, 255, 0.1);
+      box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #00d9ff, #00a8cc);
+      border: none;
+      border-radius: 6px;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .error {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid rgba(255, 59, 48, 0.5);
+      color: #ff6b6b;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .error.show { display: block; }
+
+    /* Admin Dashboard */
+    .admin-container {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .admin-container.hidden { display: none; }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+    }
+
+    .admin-header h2 {
+      font-size: 24px;
+      background: linear-gradient(135deg, #00d9ff, #00a8cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logout-btn {
+      background: #ff6b6b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #ff5252;
+      transform: translateY(-2px);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: #00d9ff;
+      border-bottom-color: #00d9ff;
+    }
+
+    .tab-content {
+      display: none;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .tab-content.active { display: block; }
+
+    .edit-section {
+      margin-bottom: 30px;
+    }
+
+    .edit-section h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #00d9ff;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #00d9ff;
+      background: rgba(0, 217, 255, 0.1);
+      box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+    }
+
+    .save-btn {
+      background: linear-gradient(135deg, #00d9ff, #00a8cc);
+      color: #000;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .save-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
+    }
+
+    .success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.5);
+      color: #81c784;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .success.show { display: block; }
+
+    .item-list {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 217, 255, 0.1);
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .item-list-item {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border-left: 3px solid #00d9ff;
+    }
+
+    .item-list-item:last-child { margin-bottom: 0; }
+
+    .item-list-item input,
+    .item-list-item textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .item-list-item input:focus,
+    .item-list-item textarea:focus {
+      outline: none;
+      border-color: #00d9ff;
+      background: rgba(0, 217, 255, 0.1);
+    }
+
+    .delete-btn {
+      background: #ff6b6b;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+
+    .delete-btn:hover {
+      background: #ff5252;
+    }
+
+    .add-btn {
+      background: linear-gradient(135deg, #00d9ff, #00a8cc);
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .add-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
+    }
+
+    .preview-container {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 100vh;
+      background: #fff;
+      border-left: 1px solid #ddd;
+      overflow-y: auto;
+      display: none;
+      z-index: 100;
+    }
+
+    .preview-container.open {
+      display: block;
+    }
+
+    .preview-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #00d9ff, #00a8cc);
+      color: #000;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 99;
+      box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4);
+    }
+
+    .preview-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .preview-content {
+      padding: 40px 20px;
+      color: #333;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .preview-content h2 {
+      color: #00a8cc;
+      margin: 20px 0 10px;
+      font-size: 20px;
+    }
+
+    .preview-content p {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1200px) {
+      .preview-container { width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .login-container { padding: 30px 20px; }
+      .admin-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .tabs { overflow-x: auto; }
+      .tab-btn { padding: 10px 15px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-container" id="loginContainer">
+    <div class="login-header">
+      <h1>🔐 Admin ALUMAX</h1>
+      <p>Painel de Administração</p>
+    </div>
+    <div class="error" id="loginError"></div>
+    <div class="form-group">
+      <label>Senha:</label>
+      <input type="password" id="passwordInput" placeholder="Digite a senha" />
+    </div>
+    <button class="btn" onclick="handleLogin()">Entrar</button>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div class="admin-container hidden" id="adminContainer">
+    <div class="admin-header">
+      <h2>🎨 Painel Administrativo - ALUMAX SP</h2>
+      <button class="logout-btn" onclick="handleLogout()">Sair</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('site')">Site</button>
+      <button class="tab-btn" onclick="switchTab('hero')">Hero</button>
+      <button class="tab-btn" onclick="switchTab('diferenciais')">Diferenciais</button>
+      <button class="tab-btn" onclick="switchTab('servicos')">Serviços</button>
+      <button class="tab-btn" onclick="switchTab('sobre')">Sobre</button>
+      <button class="tab-btn" onclick="switchTab('footer')">Rodapé</button>
+    </div>
+
+    <div class="success" id="successMsg"></div>
+
+    <!-- PREVIEW -->
+    <button class="preview-toggle" onclick="togglePreview()">👁️ Pré-visualizar</button>
+    <div class="preview-container" id="previewContainer">
+      <div style="position: sticky; top: 0; background: #f5f5f5; padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
+        <h3>📱 Pré-visualização</h3>
+        <button class="delete-btn" onclick="togglePreview()" style="background: #ff6b6b;">Fechar</button>
+      </div>
+      <div class="preview-content" id="previewContent"></div>
+    </div>
+    <div class="tab-content active" id="siteTab">
+      <div class="edit-section">
+        <h3>Informações do Site</h3>
+        <div class="form-group">
+          <label>Título:</label>
+          <input type="text" id="siteTitle" />
+        </div>
+        <div class="form-group">
+          <label>Descrição:</label>
+          <textarea id="siteDescription"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Telefone:</label>
+          <input type="text" id="sitePhone" />
+        </div>
+        <button class="save-btn" onclick="saveData('site')">Salvar</button>
+      </div>
+    </div>
+
+    <!-- Hero Tab -->
+    <div class="tab-content" id="heroTab">
+      <div class="edit-section">
+        <h3>Seção Hero</h3>
+        <div class="form-group">
+          <label>Badge:</label>
+          <input type="text" id="heroBadge" />
+        </div>
+        <div class="form-group">
+          <label>Título:</label>
+          <input type="text" id="heroTitle" />
+        </div>
+        <div class="form-group">
+          <label>Descrição:</label>
+          <textarea id="heroDescription"></textarea>
+        </div>
+        <div class="form-group">
+          <label>CTA Principal:</label>
+          <input type="text" id="heroCtaPrimary" />
+        </div>
+        <div class="form-group">
+          <label>CTA Secundária:</label>
+          <input type="text" id="heroCtaSecondary" />
+        </div>
+        <button class="save-btn" onclick="saveData('hero')">Salvar</button>
+      </div>
+    </div>
+
+    <!-- Diferenciais Tab -->
+    <div class="tab-content" id="diferenciaisTab">
+      <div class="edit-section">
+        <h3>Diferenciais</h3>
+        <div class="form-group">
+          <label>Título:</label>
+          <input type="text" id="difTitle" />
+        </div>
+        <div class="form-group">
+          <label>Descrição:</label>
+          <input type="text" id="difDescription" />
+        </div>
+        <h3 style="margin-top: 20px;">Items</h3>
+        <div class="item-list" id="diferenciaisItems"></div>
+        <button class="add-btn" onclick="addDiferencialItem()">+ Adicionar Item</button>
+        <button class="save-btn" onclick="saveData('diferenciais')" style="margin-top: 20px;">Salvar</button>
+      </div>
+    </div>
+
+    <!-- Serviços Tab -->
+    <div class="tab-content" id="servicosTab">
+      <div class="edit-section">
+        <h3>Serviços</h3>
+        <div class="item-list" id="servicosItems"></div>
+        <button class="add-btn" onclick="addServiceItem()">+ Adicionar Serviço</button>
+        <button class="save-btn" onclick="saveData('servicos')" style="margin-top: 20px;">Salvar</button>
+      </div>
+    </div>
+
+    <!-- Sobre Tab -->
+    <div class="tab-content" id="sobreTab">
+      <div class="edit-section">
+        <h3>Sobre</h3>
+        <div class="form-group">
+          <label>Título:</label>
+          <input type="text" id="sobreTitle" />
+        </div>
+        <div class="form-group">
+          <label>Descrição:</label>
+          <textarea id="sobreDescription"></textarea>
+        </div>
+        <h3 style="margin-top: 20px;">Estatísticas</h3>
+        <div class="form-group">
+          <label>Anos de Experiência:</label>
+          <input type="number" id="sobreYears" />
+        </div>
+        <div class="form-group">
+          <label>Projetos Entregues:</label>
+          <input type="number" id="sobreProjects" />
+        </div>
+        <div class="form-group">
+          <label>% Sob Medida:</label>
+          <input type="number" id="sobreCustom" />
+        </div>
+        <button class="save-btn" onclick="saveData('sobre')">Salvar</button>
+      </div>
+    </div>
+
+    <!-- Footer Tab -->
+    <div class="tab-content" id="footerTab">
+      <div class="edit-section">
+        <h3>Rodapé</h3>
+        <div class="form-group">
+          <label>Copyright:</label>
+          <input type="text" id="footerCopyright" />
+        </div>
+        <div class="form-group">
+          <label>Endereço:</label>
+          <input type="text" id="footerAddress" />
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="email" id="footerEmail" />
+        </div>
+        <button class="save-btn" onclick="saveData('footer')">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentData = {};
+    let isLoggedIn = false;
+    const API_URL = 'http://localhost:3000';
+
+    // Login
+    async function handleLogin() {
+      const password = document.getElementById('passwordInput').value;
+      const errorDiv = document.getElementById('loginError');
+
+      if (!password) {
+        errorDiv.textContent = 'Digite a senha';
+        errorDiv.classList.add('show');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          isLoggedIn = true;
+          localStorage.setItem('adminToken', data.token);
+          localStorage.setItem('adminPassword', password);
+          document.getElementById('loginContainer').classList.add('hidden');
+          document.getElementById('adminContainer').classList.remove('hidden');
+          loadData();
+          errorDiv.classList.remove('show');
+        } else {
+          errorDiv.textContent = '❌ ' + data.error;
+          errorDiv.classList.add('show');
+        }
+      } catch (error) {
+        errorDiv.textContent = 'Erro de conexão. Verifique se o servidor está rodando.';
+        errorDiv.classList.add('show');
+      }
+    }
+
+    // Logout
+    function handleLogout() {
+      isLoggedIn = false;
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminPassword');
+      document.getElementById('loginContainer').classList.remove('hidden');
+      document.getElementById('adminContainer').classList.add('hidden');
+      document.getElementById('passwordInput').value = '';
+      location.reload();
+    }
+
+    // Carregar dados
+    async function loadData() {
+      try {
+        const password = localStorage.getItem('adminPassword');
+        const response = await fetch(`${API_URL}/api/data`, {
+          headers: { 'x-admin-password': password }
+        });
+        currentData = await response.json();
+        populateFields();
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+      }
+    }
+
+    // Preencher campos
+    function populateFields() {
+      // Site
+      document.getElementById('siteTitle').value = currentData.site?.title || '';
+      document.getElementById('siteDescription').value = currentData.site?.description || '';
+      document.getElementById('sitePhone').value = currentData.site?.phone || '';
+
+      // Hero
+      document.getElementById('heroBadge').value = currentData.hero?.badge || '';
+      document.getElementById('heroTitle').value = currentData.hero?.title || '';
+      document.getElementById('heroDescription').value = currentData.hero?.description || '';
+      document.getElementById('heroCtaPrimary').value = currentData.hero?.cta_primary || '';
+      document.getElementById('heroCtaSecondary').value = currentData.hero?.cta_secondary || '';
+
+      // Diferenciais
+      document.getElementById('difTitle').value = currentData.diferenciais?.title || '';
+      document.getElementById('difDescription').value = currentData.diferenciais?.description || '';
+      renderDiferenciais();
+
+      // Serviços
+      renderServicos();
+
+      // Sobre
+      document.getElementById('sobreTitle').value = currentData.sobre?.title || '';
+      document.getElementById('sobreDescription').value = currentData.sobre?.description || '';
+      document.getElementById('sobreYears').value = currentData.sobre?.stats?.years || '';
+      document.getElementById('sobreProjects').value = currentData.sobre?.stats?.projects || '';
+      document.getElementById('sobreCustom').value = currentData.sobre?.stats?.custom || '';
+
+      // Footer
+      document.getElementById('footerCopyright').value = currentData.footer?.copyright || '';
+      document.getElementById('footerAddress').value = currentData.footer?.address || '';
+      document.getElementById('footerEmail').value = currentData.footer?.email || '';
+    }
+
+    // Renderizar diferenciais
+    function renderDiferenciais() {
+      const container = document.getElementById('diferenciaisItems');
+      container.innerHTML = '';
+      currentData.diferenciais?.items?.forEach((item, index) => {
+        container.innerHTML += `
+          <div class="item-list-item">
+            <input type="text" placeholder="Título" value="${item.title}" onchange="currentData.diferenciais.items[${index}].title = this.value" />
+            <textarea placeholder="Descrição" onchange="currentData.diferenciais.items[${index}].description = this.value">${item.description}</textarea>
+            <button class="delete-btn" onclick="deleteDiferencialItem(${index})">Deletar</button>
+          </div>
+        `;
+      });
+    }
+
+    // Adicionar diferencial
+    function addDiferencialItem() {
+      if (!currentData.diferenciais.items) currentData.diferenciais.items = [];
+      currentData.diferenciais.items.push({ title: 'Novo Diferencial', description: 'Descrição' });
+      renderDiferenciais();
+    }
+
+    // Deletar diferencial
+    function deleteDiferencialItem(index) {
+      currentData.diferenciais.items.splice(index, 1);
+      renderDiferenciais();
+    }
+
+    // Renderizar serviços
+    function renderServicos() {
+      const container = document.getElementById('servicosItems');
+      container.innerHTML = '';
+      currentData.servicos?.forEach((item, index) => {
+        container.innerHTML += `
+          <div class="item-list-item">
+            <input type="text" placeholder="Título" value="${item.title}" onchange="currentData.servicos[${index}].title = this.value" />
+            <textarea placeholder="Descrição" onchange="currentData.servicos[${index}].description = this.value">${item.description}</textarea>
+            <button class="delete-btn" onclick="deleteServiceItem(${index})">Deletar</button>
+          </div>
+        `;
+      });
+    }
+
+    // Adicionar serviço
+    function addServiceItem() {
+      currentData.servicos.push({ title: 'Novo Serviço', description: 'Descrição' });
+      renderServicos();
+    }
+
+    // Deletar serviço
+    function deleteServiceItem(index) {
+      currentData.servicos.splice(index, 1);
+      renderServicos();
+    }
+
+    // Trocar aba
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabName + 'Tab').classList.add('active');
+      event.target.classList.add('active');
+      updatePreview();
+    }
+
+    // Salvar dados
+    async function saveData(section) {
+      const password = localStorage.getItem('adminPassword');
+      
+      // Atualizar section específica
+      if (section === 'site') {
+        currentData.site = {
+          title: document.getElementById('siteTitle').value,
+          description: document.getElementById('siteDescription').value,
+          phone: document.getElementById('sitePhone').value
+        };
+      } else if (section === 'hero') {
+        currentData.hero = {
+          badge: document.getElementById('heroBadge').value,
+          title: document.getElementById('heroTitle').value,
+          description: document.getElementById('heroDescription').value,
+          cta_primary: document.getElementById('heroCtaPrimary').value,
+          cta_secondary: document.getElementById('heroCtaSecondary').value
+        };
+      } else if (section === 'diferenciais') {
+        currentData.diferenciais.title = document.getElementById('difTitle').value;
+        currentData.diferenciais.description = document.getElementById('difDescription').value;
+      } else if (section === 'sobre') {
+        currentData.sobre = {
+          title: document.getElementById('sobreTitle').value,
+          description: document.getElementById('sobreDescription').value,
+          stats: {
+            years: parseInt(document.getElementById('sobreYears').value),
+            projects: parseInt(document.getElementById('sobreProjects').value),
+            custom: parseInt(document.getElementById('sobreCustom').value),
+            rating: currentData.sobre?.stats?.rating || '5★'
+          }
+        };
+      } else if (section === 'footer') {
+        currentData.footer = {
+          copyright: document.getElementById('footerCopyright').value,
+          address: document.getElementById('footerAddress').value,
+          email: document.getElementById('footerEmail').value
+        };
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/data`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-password': password
+          },
+          body: JSON.stringify(currentData)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          const successDiv = document.getElementById('successMsg');
+          successDiv.textContent = '✅ Dados salvos com sucesso! Recarregando...';
+          successDiv.classList.add('show');
+          updatePreview();
+          // Recarregar site em nova aba para visualizar as mudanças
+          setTimeout(() => {
+            window.open('http://localhost:3000', 'siteprev');
+            successDiv.classList.remove('show');
+          }, 1500);
+        }
+      } catch (error) {
+        alert('❌ Erro ao salvar: ' + error.message);
+      }
+    }
+
+    // Check se já está logado
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('adminToken')) {
+        isLoggedIn = true;
+        document.getElementById('loginContainer').classList.add('hidden');
+        document.getElementById('adminContainer').classList.remove('hidden');
+        loadData();
+        updatePreview();
+      }
+    });
+
+    // Pré-visualização
+    function togglePreview() {
+      document.getElementById('previewContainer').classList.toggle('open');
+    }
+
+    function updatePreview() {
+      const preview = document.getElementById('previewContent');
+      let html = '<h2>📋 Conteúdo Atual</h2>';
+
+      if (currentData.site) {
+        html += `
+          <h3 style="color: #00a8cc; margin-top: 20px;">Site</h3>
+          <p><strong>Título:</strong> ${currentData.site.title}</p>
+          <p><strong>Telefone:</strong> ${currentData.site.phone}</p>
+        `;
+      }
+
+      if (currentData.hero) {
+        html += `
+          <h3 style="color: #00a8cc; margin-top: 20px;">Hero</h3>
+          <p><strong>Badge:</strong> ${currentData.hero.badge}</p>
+          <p><strong>Título:</strong> ${currentData.hero.title}</p>
+          <p><strong>Descrição:</strong> ${currentData.hero.description}</p>
+        `;
+      }
+
+      if (currentData.diferenciais?.items) {
+        html += `
+          <h3 style="color: #00a8cc; margin-top: 20px;">Diferenciais (${currentData.diferenciais.items.length} items)</h3>
+        `;
+        currentData.diferenciais.items.forEach((item, i) => {
+          html += `<p><strong>${i + 1}.</strong> ${item.title}</p>`;
+        });
+      }
+
+      if (currentData.servicos?.length) {
+        html += `
+          <h3 style="color: #00a8cc; margin-top: 20px;">Serviços (${currentData.servicos.length})</h3>
+        `;
+        currentData.servicos.forEach((srv, i) => {
+          html += `<p><strong>${i + 1}.</strong> ${srv.title}</p>`;
+        });
+      }
+
+      if (currentData.sobre) {
+        html += `
+          <h3 style="color: #00a8cc; margin-top: 20px;">Sobre</h3>
+          <p><strong>Experiência:</strong> ${currentData.sobre.stats?.years} anos</p>
+          <p><strong>Projetos:</strong> ${currentData.sobre.stats?.projects}</p>
+        `;
+      }
+
+      preview.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

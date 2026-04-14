@@ -1,0 +1,73 @@
+{
+  "site": {
+    "title": "ALUMAX SP — Esquadrias de Alumínio Sob Medida em São Paulo",
+    "description": "Esquadrias de alumínio sob medida com qualidade e acabamento profissional para projetos residenciais e comerciais em São Paulo...",
+    "phone": "551100000000000"
+  },
+  "hero": {
+    "badge": "São Paulo · Esquadrias de Alumínio Sob Medida",
+    "title": "Esquadrias de Alumínio Sob Medida em São Paulo",
+    "description": "Soluções premium de alumínio para projetos residenciais e comerciais. Qualidade, precisão e design moderno em cada projeto.",
+    "cta_primary": "Solicitar Orçamento",
+    "cta_secondary": "Ver Portfólio"
+  },
+  "diferenciais": {
+    "title": "Diferenciais ALUMAX SP",
+    "description": "O que nos diferencia no mercado",
+    "items": [
+      {
+        "title": "Projeto Personalizado",
+        "description": "Cada projeto é único. Desenvolvemos soluções sob medida para seus espaços e necessidades."
+      },
+      {
+        "title": "Materiais Premium",
+        "description": "Utilizamos alumínio de primeira linha com acabamentos sofisticados e durávels."
+      },
+      {
+        "title": "Instalação Profissional",
+        "description": "Equipe especializada garante instalação perfeita com atenção aos mínimos detalhes."
+      }
+    ]
+  },
+  "servicos": [
+    {
+      "title": "Esquadrias e Janelas",
+      "description": "Janelas em alumínio com vidro temperado. Acabamento impecável e excelente performance acústica."
+    },
+    {
+      "title": "Portas de Correr e Pivotante",
+      "description": "Portas deslizantes e pivotantes com design moderno. Funcionamento suave e silencioso."
+    },
+    {
+      "title": "Divisórias de Vidro",
+      "description": "Divisórias modulares para escritórios. Elegância, funcionalidade e aproveitamento de espaço."
+    },
+    {
+      "title": "Fachadas Pele de Vidro",
+      "description": "Fachadas envidraçadas com estrutura de alumínio para edifícios modernos. Visual sofisticado e alto desempenho."
+    },
+    {
+      "title": "Revestimento em ACM",
+      "description": "Painéis compostos de alumínio para fachadas comerciais e prediais. Durabilidade, estética e valorização do imóvel."
+    },
+    {
+      "title": "Fechamentos de Sacada",
+      "description": "Fechamentos em vidro e alumínio que ampliam e protegem seu espaço. Sistema retrátil com vista panorâmica."
+    }
+  ],
+  "sobre": {
+    "title": "Especialistas em Soluções de Alumínio em São Paulo",
+    "description": "A ALUMAX SP é referência em esquadrias de alumínio sob medida, atendendo projetos residenciais e comerciais com excelência. Nossa equipe técnica qualificada garante precisão na execução, desde o projeto até a instalação final, utilizando materiais de primeira linha para resultados que superam expectativas.",
+    "stats": {
+      "years": 10,
+      "projects": 500,
+      "custom": 100,
+      "rating": "5★"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 ALUMAX SP — Esquadrias de Alumínio. Todos os direitos reservados.",
+    "address": "São Paulo - SP 123456",
+    "email": "contato@alumaxsp.com.br"
+  }
+}

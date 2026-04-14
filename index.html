@@ -660,6 +660,150 @@
   </footer>
 
   <script>
+    // Carregar dados dinâmicos do JSON
+    let siteData = {};
+    
+    async function loadDynamicContent() {
+      try {
+        const response = await fetch('/api/data/public');
+        siteData = await response.json();
+        updatePageContent();
+      } catch (error) {
+        console.warn('Não foi possível carregar dados dinâmicos. Usando conteúdo padrão.');
+      }
+    }
+
+    function updatePageContent() {
+      // Atualizar título e descrição
+      if (siteData.site) {
+        document.title = siteData.site.title || document.title;
+        const descMeta = document.querySelector('meta[name="description"]');
+        if (descMeta && siteData.site.description) {
+          descMeta.setAttribute('content', siteData.site.description);
+        }
+      }
+
+      // Atualizar Hero
+      if (siteData.hero) {
+        const badgeSpan = document.querySelector('.hero-badge span');
+        if (badgeSpan && siteData.hero.badge) {
+          badgeSpan.textContent = siteData.hero.badge;
+        }
+
+        const heroH1 = document.querySelector('.hero-content h1');
+        if (heroH1 && siteData.hero.title) {
+          heroH1.innerHTML = siteData.hero.title + ' <span class="text-gradient">Sob Medida</span> com Qualidade e Acabamento Profissional.';
+        }
+
+        const heroDesc = document.querySelector('.hero-desc');
+        if (heroDesc && siteData.hero.description) {
+          heroDesc.textContent = siteData.hero.description;
+        }
+
+        const ctaPrimary = document.querySelector('.btn-whatsapp');
+        if (ctaPrimary && siteData.hero.cta_primary) {
+          const icon = ctaPrimary.querySelector('.icon');
+          ctaPrimary.innerHTML = icon?.outerHTML || '' + '\n          ' + siteData.hero.cta_primary;
+        }
+      }
+
+      // Atualizar Diferenciais
+      if (siteData.diferenciais) {
+        const difHeader = document.querySelector('#diferenciais .section-header h2');
+        if (difHeader && siteData.diferenciais.title) {
+          difHeader.textContent = siteData.diferenciais.title;
+        }
+
+        const difGrid = document.querySelector('.diferenciais-grid');
+        if (difGrid && siteData.diferenciais.items && siteData.diferenciais.items.length > 0) {
+          difGrid.innerHTML = '';
+          siteData.diferenciais.items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'dif-card';
+            card.innerHTML = `
+              <div class="dif-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-5.82 3.42L7 14.14 2 9.27l6.91-1.01L12 2"/></svg>
+              </div>
+              <h3>${item.title}</h3>
+              <p>${item.description}</p>
+            `;
+            difGrid.appendChild(card);
+          });
+        }
+      }
+
+      // Atualizar Serviços
+      if (siteData.servicos && siteData.servicos.length > 0) {
+        const servicosGrid = document.querySelector('.servicos-grid');
+        if (servicosGrid) {
+          servicosGrid.innerHTML = '';
+          siteData.servicos.forEach(servico => {
+            const card = document.createElement('div');
+            card.className = 'servico-card';
+            card.innerHTML = `
+              <div class="img-wrap">
+                <img src="assets/servico-${servico.title.toLowerCase().replace(/\s+/g, '-')}.jpg" alt="${servico.title}" loading="lazy" onerror="this.src='assets/hero-bg.jpg'">
+                <span class="servico-tag">Profissional</span>
+              </div>
+              <div class="content">
+                <h3>${servico.title}</h3>
+                <p>${servico.description}</p>
+              </div>
+            `;
+            servicosGrid.appendChild(card);
+          });
+        }
+      }
+
+      // Atualizar Sobre
+      if (siteData.sobre) {
+        const sobreH2 = document.querySelector('#sobre .inst-grid h2');
+        if (sobreH2 && siteData.sobre.title) {
+          sobreH2.textContent = siteData.sobre.title;
+        }
+
+        const sobreP = document.querySelector('#sobre .inst-grid > div:first-child p');
+        if (sobreP && siteData.sobre.description) {
+          sobreP.innerHTML = siteData.sobre.description;
+        }
+
+        // Atualizar estatísticas
+        if (siteData.sobre.stats) {
+          const stats = siteData.sobre.stats;
+          const instStats = document.getElementById('instStats');
+          if (instStats) {
+            const bigNumber = instStats.querySelector('.inst-big-number');
+            if (bigNumber) bigNumber.textContent = stats.years || 0;
+
+            const statItems = instStats.querySelectorAll('.inst-stat-item');
+            if (statItems[0]) statItems[0].querySelector('.num').textContent = stats.projects || 0;
+            if (statItems[1]) statItems[1].querySelector('.num').textContent = stats.custom || 0;
+            if (statItems[2]) statItems[2].querySelector('.num').textContent = stats.rating || '5★';
+          }
+        }
+      }
+
+      // Atualizar Rodapé
+      if (siteData.footer) {
+        const footerBottom = document.querySelector('.bottom p');
+        if (footerBottom && siteData.footer.copyright) {
+          footerBottom.textContent = siteData.footer.copyright;
+        }
+      }
+
+      // Atualizar WhatsApp link com telefone
+      if (siteData.site && siteData.site.phone) {
+        const waLinks = document.querySelectorAll('a[href*="wa.me"]');
+        waLinks.forEach(link => {
+          const message = 'Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.';
+          link.href = `https://wa.me/${siteData.site.phone}?text=${message}`;
+        });
+      }
+    }
+
+    // Carregar dados ao inicializar a página
+    loadDynamicContent();
+
     // Nav scroll effect
     const nav = document.getElementById('mainNav');
     const navLogo = document.querySelector('.nav-logo');
