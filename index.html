@@ -79,7 +79,14 @@
       backdrop-filter: blur(12px);
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .nav-logo { height: 5rem; width: auto; }
+    .nav-logo {
+      height: 5rem; width: auto;
+      border: 2px solid #00d9ff;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      box-shadow: 0 0 10px #00d9ff, inset 0 0 10px rgba(0, 217, 255, 0.3);
+      transition: transform 0.05s linear;
+    }
     @media (min-width: 768px) { .nav-logo { height: 6rem; } }
     .nav-links { display: none; align-items: center; gap: 2rem; font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.8); }
     @media (min-width: 768px) { .nav-links { display: flex; } }
@@ -652,8 +659,12 @@
   <script>
     // Nav scroll effect
     const nav = document.getElementById('mainNav');
+    const navLogo = document.querySelector('.nav-logo');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
+      // Logo rotation based on scroll
+      const rotation = window.scrollY * 0.5;
+      navLogo.style.transform = `rotate(${rotation}deg)`;
     }, { passive: true });
 
     // Mobile menu
