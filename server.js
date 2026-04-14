@@ -63,6 +63,7 @@ app.post('/api/login', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
-  console.log(`📊 Painel admin em http://localhost:${PORT}/admin.html`);
+  console.log(`📊 Painel admin (v2) em http://localhost:${PORT}/admin-v2.html`);
+  console.log(`📊 Painel admin (clássico) em http://localhost:${PORT}/admin.html`);
   console.log(`🌐 Site principal em http://localhost:${PORT}`);
 });

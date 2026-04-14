@@ -659,157 +659,15 @@
     </div>
   </footer>
 
+  <!-- Content Manager Script - Carrega conteúdo dinamicamente -->
+  <script src="content-manager.js"></script>
+
   <script>
-    // Carregar dados dinâmicos do JSON
-    let siteData = {};
-    
-    async function loadDynamicContent() {
-      try {
-        const response = await fetch('/api/data/public');
-        siteData = await response.json();
-        updatePageContent();
-      } catch (error) {
-        console.warn('Não foi possível carregar dados dinâmicos. Usando conteúdo padrão.');
-      }
-    }
-
-    function updatePageContent() {
-      // Atualizar título e descrição
-      if (siteData.site) {
-        document.title = siteData.site.title || document.title;
-        const descMeta = document.querySelector('meta[name="description"]');
-        if (descMeta && siteData.site.description) {
-          descMeta.setAttribute('content', siteData.site.description);
-        }
-      }
-
-      // Atualizar Hero
-      if (siteData.hero) {
-        const badgeSpan = document.querySelector('.hero-badge span');
-        if (badgeSpan && siteData.hero.badge) {
-          badgeSpan.textContent = siteData.hero.badge;
-        }
-
-        const heroH1 = document.querySelector('.hero-content h1');
-        if (heroH1 && siteData.hero.title) {
-          heroH1.innerHTML = siteData.hero.title + ' <span class="text-gradient">Sob Medida</span> com Qualidade e Acabamento Profissional.';
-        }
-
-        const heroDesc = document.querySelector('.hero-desc');
-        if (heroDesc && siteData.hero.description) {
-          heroDesc.textContent = siteData.hero.description;
-        }
-
-        const ctaPrimary = document.querySelector('.btn-whatsapp');
-        if (ctaPrimary && siteData.hero.cta_primary) {
-          const icon = ctaPrimary.querySelector('.icon');
-          ctaPrimary.innerHTML = icon?.outerHTML || '' + '\n          ' + siteData.hero.cta_primary;
-        }
-      }
-
-      // Atualizar Diferenciais
-      if (siteData.diferenciais) {
-        const difHeader = document.querySelector('#diferenciais .section-header h2');
-        if (difHeader && siteData.diferenciais.title) {
-          difHeader.textContent = siteData.diferenciais.title;
-        }
-
-        const difGrid = document.querySelector('.diferenciais-grid');
-        if (difGrid && siteData.diferenciais.items && siteData.diferenciais.items.length > 0) {
-          difGrid.innerHTML = '';
-          siteData.diferenciais.items.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'dif-card';
-            card.innerHTML = `
-              <div class="dif-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-5.82 3.42L7 14.14 2 9.27l6.91-1.01L12 2"/></svg>
-              </div>
-              <h3>${item.title}</h3>
-              <p>${item.description}</p>
-            `;
-            difGrid.appendChild(card);
-          });
-        }
-      }
-
-      // Atualizar Serviços
-      if (siteData.servicos && siteData.servicos.length > 0) {
-        const servicosGrid = document.querySelector('.servicos-grid');
-        if (servicosGrid) {
-          servicosGrid.innerHTML = '';
-          siteData.servicos.forEach(servico => {
-            const card = document.createElement('div');
-            card.className = 'servico-card';
-            card.innerHTML = `
-              <div class="img-wrap">
-                <img src="assets/servico-${servico.title.toLowerCase().replace(/\s+/g, '-')}.jpg" alt="${servico.title}" loading="lazy" onerror="this.src='assets/hero-bg.jpg'">
-                <span class="servico-tag">Profissional</span>
-              </div>
-              <div class="content">
-                <h3>${servico.title}</h3>
-                <p>${servico.description}</p>
-              </div>
-            `;
-            servicosGrid.appendChild(card);
-          });
-        }
-      }
-
-      // Atualizar Sobre
-      if (siteData.sobre) {
-        const sobreH2 = document.querySelector('#sobre .inst-grid h2');
-        if (sobreH2 && siteData.sobre.title) {
-          sobreH2.textContent = siteData.sobre.title;
-        }
-
-        const sobreP = document.querySelector('#sobre .inst-grid > div:first-child p');
-        if (sobreP && siteData.sobre.description) {
-          sobreP.innerHTML = siteData.sobre.description;
-        }
-
-        // Atualizar estatísticas
-        if (siteData.sobre.stats) {
-          const stats = siteData.sobre.stats;
-          const instStats = document.getElementById('instStats');
-          if (instStats) {
-            const bigNumber = instStats.querySelector('.inst-big-number');
-            if (bigNumber) bigNumber.textContent = stats.years || 0;
-
-            const statItems = instStats.querySelectorAll('.inst-stat-item');
-            if (statItems[0]) statItems[0].querySelector('.num').textContent = stats.projects || 0;
-            if (statItems[1]) statItems[1].querySelector('.num').textContent = stats.custom || 0;
-            if (statItems[2]) statItems[2].querySelector('.num').textContent = stats.rating || '5★';
-          }
-        }
-      }
-
-      // Atualizar Rodapé
-      if (siteData.footer) {
-        const footerBottom = document.querySelector('.bottom p');
-        if (footerBottom && siteData.footer.copyright) {
-          footerBottom.textContent = siteData.footer.copyright;
-        }
-      }
-
-      // Atualizar WhatsApp link com telefone
-      if (siteData.site && siteData.site.phone) {
-        const waLinks = document.querySelectorAll('a[href*="wa.me"]');
-        waLinks.forEach(link => {
-          const message = 'Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.';
-          link.href = `https://wa.me/${siteData.site.phone}?text=${message}`;
-        });
-      }
-    }
-
-    // Carregar dados ao inicializar a página
-    loadDynamicContent();
-
-    // Nav scroll effect
+    // Nav scroll effect e logo rotation
     const nav = document.getElementById('mainNav');
     const navLogo = document.querySelector('.nav-logo');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
-      // Logo rotation based on scroll
       const rotation = window.scrollY * 0.5;
       navLogo.style.transform = `rotate(${rotation}deg)`;
     }, { passive: true });
@@ -828,30 +686,13 @@
       hamburger.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>';
     }
 
-    // Count-up animation
-    function countUp(el, target, duration, suffix) {
-      let start = 0;
-      const increment = target / (duration / 16);
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-          el.textContent = target + '+' + (suffix || '');
-          clearInterval(timer);
-        } else {
-          el.textContent = Math.floor(start) + '+' + (suffix || '');
-        }
-      }, 16);
-    }
-
     // Intersection observer for animations
     function setupCountUp(containerSelector) {
       const container = document.querySelector(containerSelector);
       if (!container) return;
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
-          // Animate stat items
           container.querySelectorAll('.stat-item, .inst-stat-item, .inst-main-stat').forEach(el => el.classList.add('visible'));
-          // Count up numbers
           container.querySelectorAll('[data-target]').forEach(el => {
             const target = parseInt(el.dataset.target);
             const suffix = el.dataset.suffix || '';
@@ -877,5 +718,62 @@
     setupCountUp('#heroStats');
     setupCountUp('#instStats');
   </script>
+
+  <!-- WhatsApp Floating Button -->
+  <style>
+    .whatsapp-button {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 4rem;
+      height: 4rem;
+      background: linear-gradient(135deg, #25D366, #20BA5A);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-button:active {
+      transform: scale(0.95);
+    }
+
+    .whatsapp-button svg {
+      width: 2rem;
+      height: 2rem;
+      fill: white;
+    }
+
+    @media (max-width: 640px) {
+      .whatsapp-button {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      .whatsapp-button svg {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+    }
+  </style>
+
+  <a href="https://wa.me/5511924679423?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20esquadrias%20de%20alum%C3%ADnio." target="_blank" rel="noopener noreferrer" class="whatsapp-button" title="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.869 1.171c-1.493.807-2.786 1.962-3.756 3.355C2.596 13.183 2.064 15.555 2.585 17.9c.521 2.345 1.926 4.409 3.942 5.839a9.989 9.989 0 004.774 1.265h.004c2.215 0 4.408-.563 6.35-1.629 1.942-1.067 3.6-2.57 4.856-4.359.655-.975 1.21-2.024 1.656-3.122.446-1.099.771-2.247.96-3.421.189-1.174.181-2.368-.024-3.529a9.998 9.998 0 00-1.563-3.707 10.007 10.007 0 00-3.143-2.65A9.974 9.974 0 0012.051 2zm0-2C6.477 0 1.636 3.6.36 8.631c-.714 2.852-.464 5.864.795 8.645 1.254 2.78 3.4 5.012 6.14 6.332a10.025 10.025 0 003.078.687h.03c3.455 0 6.83-.904 9.776-2.617 2.946-1.712 5.34-4.134 6.941-7.048 1.601-2.914 2.409-6.153 2.353-9.406-.056-3.254-.987-6.464-2.752-9.227C21.403 2.399 18.97.675 16.2.206 14.853-.024 13.464-.024 12.051 0z"/>
+    </svg>
+  </a>
+
 </body>
 </html>
