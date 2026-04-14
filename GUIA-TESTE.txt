@@ -1,0 +1,170 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                    🧪 GUIA DE TESTE - MUDANÇAS REALIZADAS 🧪               ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+🔴 TESTE 1: Botão WhatsApp com Logo WebP
+═══════════════════════════════════════════════════════════════════════════════
+
+Passos:
+
+1. Inicie o servidor:
+   $ node server.js
+
+2. Abra no navegador:
+   http://localhost:3000
+
+3. Procure o botão NO CANTO INFERIOR DIREITO:
+   └─ Deve estar um botão VERDE com logo do WhatsApp
+   └─ Logo deve ser a imagem profissional em assets/zap.webp
+   └─ NÃO deve ser mais SVG
+
+4. Teste o Hover:
+   └─ Passe o mouse sobre o botão
+   └─ Deve aumentar de tamanho (scale 1.1)
+   └─ Sombra deve ficar mais forte
+
+5. Teste o Click:
+   └─ Clique no botão
+   └─ Deve abrir WhatsApp (https://wa.me/5511924679423)
+   └─ Mensagem pré-pronta deve aparecer
+   └─ Abre em nova aba (target="_blank")
+
+6. Teste Responsividade (Mobile):
+   └─ Redimensione a janela para menos de 640px
+   └─ Botão deve ficar menor (3.5rem ao invés de 4rem)
+   └─ Logo deve manter proporção (object-fit: contain)
+   └─ Posição deve manter-se no canto direito
+
+✅ Esperado:
+   ✓ Logo WebP carregando corretamente
+   ✓ Sem erros no console
+   ✓ Animações funcionando suavemente
+   ✓ Responsivo em mobile
+
+
+🟢 TESTE 2: Painel Admin Salvando em www.alumaxsp.com.br
+═══════════════════════════════════════════════════════════════════════════════
+
+Passos:
+
+1. Acesse o painel admin:
+   http://localhost:3000/admin.html
+
+2. Faça login com a senha:
+   0000
+
+3. Abra qualquer seção (ex: "Site"):
+   └─ Edite algum campo
+   └─ Ex: Altere o título
+
+4. Clique em "Salvar":
+   └─ Você deve ver uma mensagem de sucesso
+   └─ A requisição deve ser enviada para:
+     https://www.alumaxsp.com.br/api/data
+
+5. Abra o DevTools (F12):
+   └─ Vá para a aba "Network"
+   └─ Repita o teste de salvar
+   └─ Procure por uma requisição POST
+   └─ A URL deve conter:
+     https://www.alumaxsp.com.br/api/data
+
+✅ Esperado:
+   ✓ Requisição POST sendo enviada para www.alumaxsp.com.br
+   ✓ NÃO mais para localhost:3000
+   ✓ Status de sucesso (200 OK)
+
+
+🟡 TESTE 3: Verificar Imagem WebP em Assets
+═══════════════════════════════════════════════════════════════════════════════
+
+Passos:
+
+1. Abra o DevTools (F12)
+   └─ Aba "Network"
+
+2. Recarregue a página (F5)
+   └─ Procure por "zap.webp"
+
+3. Verifique:
+   └─ Arquivo deve estar sendo carregado
+   └─ Status: 200 (sucesso)
+   └─ Tipo: image/webp
+   └─ Size: ~20-50 KB
+
+✅ Esperado:
+   ✓ assets/zap.webp carregando com sucesso
+   ✓ Nenhum erro 404
+   ✓ Logo visível no botão
+
+
+🟠 TESTE 4: Validar HTML
+═══════════════════════════════════════════════════════════════════════════════
+
+Passos:
+
+1. Verifique a sintaxe HTML:
+   $ node -c index.html
+
+2. Verifique o arquivo admin.html:
+   $ node -c admin.html
+
+3. Acesse W3C Validator (online):
+   https://validator.w3.org/
+
+✅ Esperado:
+   ✓ Sem erros de sintaxe
+   ✓ HTML válido
+   ✓ Sem avisos de estrutura
+
+
+📋 CHECKLIST FINAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Alteração #1 - API_URL:
+  ☐ admin.html linha 563: API_URL = 'https://www.alumaxsp.com.br'
+  ☐ Painel admin salvando requisições para www.alumaxsp.com.br
+  ☐ Sem erros de conexão ao salvar
+
+Alteração #2 - Logo WhatsApp:
+  ☐ index.html tem <img src="assets/zap.webp">
+  ☐ Botão WhatsApp carregando a imagem
+  ☐ assets/zap.webp acessível (status 200)
+  ☐ Nenhum erro de carregamento de imagem
+  ☐ Responsivo em desktop (4rem) e mobile (3.5rem)
+  ☐ Animações funcionando (hover scale, click scale)
+
+Qualidade:
+  ☐ Sem erros no console do navegador
+  ☐ Sem erros no DevTools (Network)
+  ☐ Sem avisos de sintaxe HTML
+  ☐ Performance normal
+
+
+🎯 RESULTADO
+═══════════════════════════════════════════════════════════════════════════════
+
+Se todos os testes acima passarem com ✓:
+
+  ✅ TUDO ESTÁ FUNCIONANDO CORRETAMENTE!
+  ✅ READY PARA PRODUÇÃO!
+
+
+📞 CONTATO WHATSAPP
+═══════════════════════════════════════════════════════════════════════════════
+
+Número: 55 11 92467-9423 (Brasil)
+Link: https://wa.me/5511924679423?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20esquadrias%20de%20alumínio.
+Mensagem Pré-preenchida: "Olá! Gostaria de solicitar um orçamento para esquadrias de alumínio."
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Testes Concluídos: 14/04/2026
+Status: PRONTO PARA DEPLOY
+
+═══════════════════════════════════════════════════════════════════════════════
