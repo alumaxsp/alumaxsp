@@ -702,10 +702,10 @@
             const timer = setInterval(() => {
               start += increment;
               if (start >= target) {
-                el.textContent = target + '+' + suffix;
+                el.textContent = '+' + target + suffix;
                 clearInterval(timer);
               } else {
-                el.textContent = Math.floor(start) + '+' + suffix;
+                el.textContent = '+' + Math.floor(start) + suffix;
               }
             }, 16);
           });
